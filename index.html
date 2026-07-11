@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Opening Messages…</title>
+<style>
+  :root { color-scheme: dark; }
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+       background:#0b0b0c;color:#eee;margin:0;min-height:100vh;display:flex;
+       align-items:center;justify-content:center;text-align:center;padding:24px}
+  .wrap{max-width:420px}
+  p{font-size:17px;color:#aaa;margin:0 0 8px}
+  .btn{display:inline-block;margin-top:18px;padding:16px 30px;background:#0a84ff;
+       color:#fff;text-decoration:none;border-radius:14px;font-size:18px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p>Opening your text…</p>
+  <a id="go" class="btn" href="#">Tap to text them</a>
+</div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var n = (q.get('n') || '').replace(/[^0-9]/g, '');
+  if (n.length === 10) n = '1' + n;
+  var biz = (q.get('b') || '').trim();
+  var hello = biz ? ('Hi ' + biz + '!') : 'Hi there!';
+  var pitch = hello + " I'm Eli, a local website designer here in Minnesota. " +
+    "I came across your business and noticed your website could use a refresh — " +
+    "I'd be happy to build you a free sample to show you, at no cost or obligation. " +
+    "Would that be alright?";
+  var url = 'sms:+' + n + '&body=' + encodeURIComponent(pitch);
+  var a = document.getElementById('go');
+  a.href = url;
+  a.textContent = biz ? ('Tap to text ' + biz) : 'Tap to text them';
+  // Try to open Messages automatically; the button is the fallback if iOS blocks it.
+  if (n) { try { location.href = url; } catch (e) {} }
+})();
+</script>
+</body>
+</html>
