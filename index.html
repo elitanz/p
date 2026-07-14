@@ -28,10 +28,10 @@
   if (n.length === 10) n = '1' + n;
   var biz = (q.get('b') || '').trim();
   var hello = biz ? ('Hi ' + biz + '!') : 'Hi there!';
-  var pitch = hello + " I'm Eli, a local website designer here in Minnesota. " +
-    "I came across your business and noticed your website could use a refresh — " +
-    "I'd be happy to build you a free sample to show you, at no cost or obligation. " +
-    "Would that be alright?";
+  var pitch = hello + " I'm Eli, a local website designer here in Minnesota " +
+    "(my work: elitanz.github.io). I came across your business and noticed your " +
+    "website could use a refresh — I'd be happy to build you a free sample to " +
+    "show you, at no cost or obligation. Would that be alright?";
   var url = 'sms:+' + n + '&body=' + encodeURIComponent(pitch);
   var a = document.getElementById('go');
   a.href = url;
