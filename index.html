@@ -27,11 +27,27 @@
   var n = (q.get('n') || '').replace(/[^0-9]/g, '');
   if (n.length === 10) n = '1' + n;
   var biz = (q.get('b') || '').trim();
+  var trade = (q.get('t') || '').trim();          // e.g. "plumber"
+  var sample = (q.get('s') || '').trim();         // a real example site URL
   var hello = biz ? ('Hi ' + biz + '!') : 'Hi there!';
-  var pitch = hello + " I'm Eli, a local website designer here in Minnesota " +
-    "(my work: elitanz.github.io). I came across your business and noticed your " +
-    "website could use a refresh — I'd be happy to build you a free sample to " +
-    "show you, at no cost or obligation. Would that be alright?";
+
+  var pitch;
+  if (trade && sample) {
+    pitch = hello + " I'm Eli, a website designer here in Minnesota. I build " +
+      "sites for " + trade + "s — here's one I made for another local " + trade +
+      ": " + sample + ". I noticed your site could use a refresh, so I'd build " +
+      "you a free sample like it — no cost or obligation. Sound good?";
+  } else if (sample) {
+    pitch = hello + " I'm Eli, a local website designer here in Minnesota. Here's " +
+      "some of my recent work: " + sample + ". I noticed your site could use a " +
+      "refresh — I'd be happy to build you a free sample, no cost or obligation. " +
+      "Would that be alright?";
+  } else {
+    pitch = hello + " I'm Eli, a local website designer here in Minnesota " +
+      "(my work: elitanz.github.io). I came across your business and noticed your " +
+      "website could use a refresh — I'd be happy to build you a free sample to " +
+      "show you, at no cost or obligation. Would that be alright?";
+  }
   var url = 'sms:+' + n + '&body=' + encodeURIComponent(pitch);
   var a = document.getElementById('go');
   a.href = url;
